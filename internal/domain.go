@@ -8,9 +8,6 @@ import (
 	ucModels "gitlab16.skiftrade.kz/templates1/go/internal/usecase/models"
 )
 
-type Service interface {
-}
-
 type Repository interface {
 	DBBeginTransaction(ctx context.Context) (pgx.Tx, error)
 	Close()
