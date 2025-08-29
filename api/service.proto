@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package api.gotemplate;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "gitlab16.skiftrade.kz/templates1/go/api;gotemplate";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "GO Template"
+    version: "1.0.0"
+  }
+};
+
+service Users {
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {post: "/v1/user"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "GetUser"
+      description: "Метод для получения пользователя"
+    };
+  }
+}
+
+
+message GetUserRequest {
+  int64 user_id = 1;
+}
+
+message GetUserResponse {
+  User data = 1;
+}
+
+message User {
+  int64 id = 1;
+  string name = 2;
+  string surname = 3;
+}

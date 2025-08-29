@@ -1,0 +1,7 @@
+.idea
+.env
+.tmp
+*.crt
+*.out
+.vscode/settings.json
+vendor
