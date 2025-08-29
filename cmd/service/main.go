@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	repoModels "gitlab16.skiftrade.kz/templates1/go/internal/repository/models"
 	"log/slog"
 
 	"gitlab16.skiftrade.kz/libs-go/logger"
@@ -30,12 +29,13 @@ func main() {
 		return
 	}
 
-	pool, err := repository.NewPostgres(ctx, repoModels.ConfigPostgres{})
-	if err != nil {
-		return
-	}
+	//pool, err := repository.NewPostgres(ctx, repoModels.ConfigPostgres{})
+	//if err != nil {
+	//	slog.ErrorContext(ctx, "failed to init postgres", logger.ErrorAttr(err))
+	//	return
+	//}
 
-	repo := repository.NewRepository(pool)
+	repo := repository.NewRepository(nil)
 
 	api.RegisterUsersServer(app.GrpcServer, service.NewService(usecase.NewUseCase(repo)))
 	err = api.RegisterUsersHandler(ctx, app.ServeMux, app.GrpcConn)
@@ -51,5 +51,5 @@ func main() {
 	}
 
 	// Закрываем соединение с БД
-	repo.Close()
+	// repo.Close()
 }

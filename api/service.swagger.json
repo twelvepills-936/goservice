@@ -37,11 +37,12 @@
         },
         "parameters": [
           {
-            "name": "userId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gotemplateGetUserRequest"
+            }
           }
         ],
         "tags": [
@@ -51,6 +52,15 @@
     }
   },
   "definitions": {
+    "gotemplateGetUserRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "gotemplateGetUserResponse": {
       "type": "object",
       "properties": {

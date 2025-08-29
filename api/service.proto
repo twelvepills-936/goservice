@@ -15,7 +15,10 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 
 service Users {
   rpc GetUser (GetUserRequest) returns (GetUserResponse) {
-    option (google.api.http) = {post: "/v1/user"};
+    option (google.api.http) = {
+      post: "/v1/user"
+      body: "*"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       summary: "GetUser"
       description: "Метод для получения пользователя"

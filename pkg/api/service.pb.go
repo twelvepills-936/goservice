@@ -183,10 +183,9 @@ const file_service_proto_rawDesc = "" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
-	"\asurname\x18\x03 \x01(\tR\asurname2\xb1\x01\n" +
-	"\x05Users\x12\xa7\x01\n" +
-	"\aGetUser\x12\x1e.api.gotemplate.GetUserRequest\x1a\x1f.api.gotemplate.GetUserResponse\"[\x92AH\x12\aGetUser\x1a=Метод для получения пользователя\x82\xd3\xe4\x93\x02\n" +
-	"\"\b/v1/userBM\x92A\x16\x12\x14\n" +
+	"\asurname\x18\x03 \x01(\tR\asurname2\xb4\x01\n" +
+	"\x05Users\x12\xaa\x01\n" +
+	"\aGetUser\x12\x1e.api.gotemplate.GetUserRequest\x1a\x1f.api.gotemplate.GetUserResponse\"^\x92AH\x12\aGetUser\x1a=Метод для получения пользователя\x82\xd3\xe4\x93\x02\r:\x01*\"\b/v1/userBM\x92A\x16\x12\x14\n" +
 	"\vGO Template2\x051.0.0Z2gitlab16.skiftrade.kz/templates1/go/api;gotemplateb\x06proto3"
 
 var (
