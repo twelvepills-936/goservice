@@ -74,3 +74,10 @@ google.golang.org/grpc/cmd/protoc-gen-go-grpc
 | `PG_POOL_HEALTH_CHECK_PERIOD`           | duration | `1m`                                           | Период проверки состояния соединений                                             |
 
 ---
+
+
+После успешного запуска сервиса в режиме dev будет доступен swagger по пути:
+
+```
+http://localhost:8090/swagger
+```
