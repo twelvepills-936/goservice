@@ -55,6 +55,7 @@ function protoc_gen_code_go() {
   protoc ${INCLUDE} \
     --go_out=${DST_DIR_GO} \
     --go_opt=paths=source_relative \
+    --go_opt=default_api_level=API_OPAQUE \
     --go-grpc_out=${DST_DIR_GO} \
     --go-grpc_opt=paths=source_relative \
     --grpc-gateway_out=${DST_DIR_GO} \

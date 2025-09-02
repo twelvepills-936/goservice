@@ -12,7 +12,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -24,10 +23,10 @@ const (
 )
 
 type GetUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *GetUserRequest) Reset() {
@@ -55,23 +54,36 @@ func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
-func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *GetUserRequest) GetUserId() int64 {
 	if x != nil {
-		return x.UserId
+		return x.xxx_hidden_UserId
 	}
 	return 0
 }
 
+func (x *GetUserRequest) SetUserId(v int64) {
+	x.xxx_hidden_UserId = v
+}
+
+type GetUserRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	UserId int64
+}
+
+func (b0 GetUserRequest_builder) Build() *GetUserRequest {
+	m0 := &GetUserRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_UserId = b.UserId
+	return m0
+}
+
 type GetUserResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *User                  `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Data *User                  `protobuf:"bytes,1,opt,name=data,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetUserResponse) Reset() {
@@ -99,25 +111,49 @@ func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
-func (*GetUserResponse) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *GetUserResponse) GetData() *User {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
+func (x *GetUserResponse) SetData(v *User) {
+	x.xxx_hidden_Data = v
+}
+
+func (x *GetUserResponse) HasData() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Data != nil
+}
+
+func (x *GetUserResponse) ClearData() {
+	x.xxx_hidden_Data = nil
+}
+
+type GetUserResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Data *User
+}
+
+func (b0 GetUserResponse_builder) Build() *GetUserResponse {
+	m0 := &GetUserResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Data = b.Data
+	return m0
+}
+
 type User struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Surname       string                 `protobuf:"bytes,3,opt,name=surname,proto3" json:"surname,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id      int64                  `protobuf:"varint,1,opt,name=id,proto3"`
+	xxx_hidden_Name    string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_Surname string                 `protobuf:"bytes,3,opt,name=surname,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
@@ -145,30 +181,55 @@ func (x *User) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use User.ProtoReflect.Descriptor instead.
-func (*User) Descriptor() ([]byte, []int) {
-	return file_service_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *User) GetId() int64 {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return 0
 }
 
 func (x *User) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *User) GetSurname() string {
 	if x != nil {
-		return x.Surname
+		return x.xxx_hidden_Surname
 	}
 	return ""
+}
+
+func (x *User) SetId(v int64) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *User) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *User) SetSurname(v string) {
+	x.xxx_hidden_Surname = v
+}
+
+type User_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id      int64
+	Name    string
+	Surname string
+}
+
+func (b0 User_builder) Build() *User {
+	m0 := &User{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Surname = b.Surname
+	return m0
 }
 
 var File_service_proto protoreflect.FileDescriptor
@@ -187,18 +248,6 @@ const file_service_proto_rawDesc = "" +
 	"\x05Users\x12\xaa\x01\n" +
 	"\aGetUser\x12\x1e.api.gotemplate.GetUserRequest\x1a\x1f.api.gotemplate.GetUserResponse\"^\x92AH\x12\aGetUser\x1a=Метод для получения пользователя\x82\xd3\xe4\x93\x02\r:\x01*\"\b/v1/userBM\x92A\x16\x12\x14\n" +
 	"\vGO Template2\x051.0.0Z2gitlab16.skiftrade.kz/templates1/go/api;gotemplateb\x06proto3"
-
-var (
-	file_service_proto_rawDescOnce sync.Once
-	file_service_proto_rawDescData []byte
-)
-
-func file_service_proto_rawDescGZIP() []byte {
-	file_service_proto_rawDescOnce.Do(func() {
-		file_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_service_proto_rawDesc), len(file_service_proto_rawDesc)))
-	})
-	return file_service_proto_rawDescData
-}
 
 var file_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_service_proto_goTypes = []any{
