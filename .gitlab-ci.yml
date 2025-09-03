@@ -1,13 +1,44 @@
-# You can override the included template(s) by including variable overrides
-# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
-# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/pipeline/#customization
-# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
-# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
-# Note that environment variables can be set in several places
-# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
-stages:
-- test
-sast:
-  stage: test
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^BS-\d+[\w-\.]*$/i
+    - if: $CI_COMMIT_BRANCH =~ /^ML-\d+[\w-\.]*$/i
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG =~ /^\d{2}\.\d{2}\.\d{2}\.\d{6}$/
+
+variables:
+  # git
+  GIT_DEPTH: 1
+  # task
+  TASK_DOMAIN_PREFIX: 'ecom-template-go'
+  TASK_CMN_ON: "true"
+  TASK_TYPE_DEPLOY: "auto"
+  # general
+  MAIN_IMAGE: "false"
+  ENV_ON: "true"
+  ENV_MAP: "true"
+  PROD_TYPE: k8s
+  TECH_STACK: go
+  K8S_DC: yc
+  BRANCH_LAG_STOP: "false"
+  FILES_MAP: internal/migrations
+  NAME_CERTIFICATES: "ecom-task.small.kz small.kz"
+  # helm
+  TASK_CHART_VERSION: 1.5.2
+  # autotests
+  AUTOTESTS_SELF_DEPLOY: "true"
+
 include:
-- template: Security/SAST.gitlab-ci.yml
+  - project: devops/web-ci
+    ref: 1.7.1
+    file:
+      - /base-template.yml
+      - /jobs/autotests.yml
+  - project: autotests/bb
+    ref: master
+    file:
+      - /templates/.base-ml-template.yml
+
+  - local: .gitlab/ci/.base.yml
+  - local: .gitlab/ci/jobs/release-candidate.yml
+  - local: .gitlab/ci/jobs/tests.yml
+  - local: .gitlab/ci/jobs/release.yml
