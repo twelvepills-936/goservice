@@ -258,6 +258,8 @@ gitlab16.skiftrade.kz/libs-go/new-app v1.0.2 h1:B4Co1FigLwqbGQtiJ0ZXi0EkyCOoQlYr
 gitlab16.skiftrade.kz/libs-go/new-app v1.0.2/go.mod h1:9vHP5RjpRRktq6RjoAHK+ZlK0QjIsrK2y7lewYurPT8=
 gitlab16.skiftrade.kz/libs-go/new-app v1.0.3 h1:jucMnnSEJcW4G3uVbD4vE5yV7IVELjGan5RaIlEosCk=
 gitlab16.skiftrade.kz/libs-go/new-app v1.0.3/go.mod h1:dxBJtw09gViUNBnghCUbm4AClVh8A3qJgYOeyhe5Ehc=
+gitlab16.skiftrade.kz/libs-go/new-app v1.0.4 h1:YlsJZiNx6AKO9ga+kZSlS47jC4Qlbw3ce4+i4+UjEhs=
+gitlab16.skiftrade.kz/libs-go/new-app v1.0.4/go.mod h1:dxBJtw09gViUNBnghCUbm4AClVh8A3qJgYOeyhe5Ehc=
 gitlab16.skiftrade.kz/libs-go/requestid v1.0.0 h1:yjEUU3ECaBItZ01o2zgQMDo9m+1xcdJwaipwudKId9A=
 gitlab16.skiftrade.kz/libs-go/requestid v1.0.0/go.mod h1:UcTY6AGYfXlHqCuWSL7ZjLhCux38GzJeUMjbPvVaxZQ=
 gitlab16.skiftrade.kz/libs-go/telemetry v1.0.0 h1:7kxz6Ycq/8G6RWNQ80er4uPVNbki0fg8COVfW2ZCd0U=

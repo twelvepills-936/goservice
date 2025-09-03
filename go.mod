@@ -8,7 +8,7 @@ require (
 	github.com/jackc/pgx/v5 v5.7.5
 	gitlab16.skiftrade.kz/libs-go/health v1.0.0
 	gitlab16.skiftrade.kz/libs-go/logger v1.0.2
-	gitlab16.skiftrade.kz/libs-go/new-app v1.0.3
+	gitlab16.skiftrade.kz/libs-go/new-app v1.0.4
 	google.golang.org/genproto v0.0.0-20230223222841-637eb2293923
 	google.golang.org/grpc v1.71.1
 	google.golang.org/protobuf v1.36.6
