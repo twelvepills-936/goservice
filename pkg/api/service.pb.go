@@ -24,7 +24,7 @@ const (
 
 type GetUserRequest struct {
 	state             protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_UserId int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3"`
+	xxx_hidden_UserId int64                  `protobuf:"varint,1,opt,name=userId,proto3"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -236,9 +236,9 @@ var File_service_proto protoreflect.FileDescriptor
 
 const file_service_proto_rawDesc = "" +
 	"\n" +
-	"\rservice.proto\x12\x0eapi.gotemplate\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\")\n" +
-	"\x0eGetUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\";\n" +
+	"\rservice.proto\x12\x0eapi.gotemplate\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"K\n" +
+	"\x0eGetUserRequest\x129\n" +
+	"\x06userId\x18\x01 \x01(\x03B!\x92A\x1e2\x1cThe UserId field descriptionR\x06userId\";\n" +
 	"\x0fGetUserResponse\x12(\n" +
 	"\x04data\x18\x01 \x01(\v2\x14.api.gotemplate.UserR\x04data\"D\n" +
 	"\x04User\x12\x0e\n" +

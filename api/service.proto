@@ -28,7 +28,7 @@ service Users {
 
 
 message GetUserRequest {
-  int64 user_id = 1;
+  int64 userId = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The UserId field description"}];
 }
 
 message GetUserResponse {

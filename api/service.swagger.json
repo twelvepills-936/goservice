@@ -57,7 +57,8 @@
       "properties": {
         "userId": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "description": "The UserId field description"
         }
       }
     },
