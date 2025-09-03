@@ -14,7 +14,7 @@ func (r *Repository) ReadUser(ctx context.Context, id int64, dbTx pgx.Tx) (user 
 	const q = `
 		SELECT id, name, surname
 		FROM users
-		WHERE inn = $1
+		WHERE id = $1
 		LIMIT 1`
 
 	if dbTx != nil {

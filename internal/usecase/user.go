@@ -14,10 +14,6 @@ func (uc *useCase) GetUser(ctx context.Context, input models.GetUserInput) (outp
 		return output, err
 	}
 
-	//return models.GetUserOutput{
-	//	Data: models.User{ID: 1},
-	//}, nil
-
 	user, err := uc.repo.ReadUser(ctx, input.UserID, nil)
 	if err != nil {
 		if errors.Is(err, repoModels.ErrUserIsNotFound) {

@@ -79,7 +79,6 @@ func getDSN(cfg models.ConfigPostgres) string {
 	q.Set("pool_max_conn_lifetime", cfg.PoolMaxConnLifeTime.String())
 	q.Set("pool_max_conn_idle_time", cfg.PoolMaxConnIdleTime.String())
 	q.Set("pool_health_check_period", cfg.PoolHealthCheckPeriod.String())
-	q.Set("prefer_simple_protocol", strconv.FormatBool(cfg.PreferSimpleProtocol))
 
 	if cfg.SSLRootCert != "" {
 		q.Set("sslrootcert", cfg.SSLRootCert)

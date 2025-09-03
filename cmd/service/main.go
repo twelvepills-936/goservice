@@ -7,9 +7,11 @@ import (
 	"gitlab16.skiftrade.kz/libs-go/logger"
 	application "gitlab16.skiftrade.kz/libs-go/new-app"
 	"gitlab16.skiftrade.kz/templates1/go/internal/repository"
+	repoModels "gitlab16.skiftrade.kz/templates1/go/internal/repository/models"
 	"gitlab16.skiftrade.kz/templates1/go/internal/service"
 	"gitlab16.skiftrade.kz/templates1/go/internal/usecase"
 	api "gitlab16.skiftrade.kz/templates1/go/pkg/api"
+	"gitlab16.skiftrade.kz/templates1/go/pkg/config"
 )
 
 func main() {
@@ -23,19 +25,21 @@ func main() {
 		panic(err)
 	}
 
+	addConfig := config.LoadConfig()
+
 	err = app.Init(ctx)
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to init app", logger.ErrorAttr(err))
 		return
 	}
 
-	//pool, err := repository.NewPostgres(ctx, repoModels.ConfigPostgres{})
-	//if err != nil {
-	//	slog.ErrorContext(ctx, "failed to init postgres", logger.ErrorAttr(err))
-	//	return
-	//}
+	pool, err := repository.NewPostgres(ctx, repoModels.ConfigPostgres(addConfig.Postgres))
+	if err != nil {
+		slog.ErrorContext(ctx, "failed to init postgres", logger.ErrorAttr(err))
+		return
+	}
 
-	repo := repository.NewRepository(nil)
+	repo := repository.NewRepository(pool)
 
 	api.RegisterUsersServer(app.GrpcServer, service.NewService(usecase.NewUseCase(repo)))
 	err = api.RegisterUsersHandler(ctx, app.ServeMux, app.GrpcConn)
@@ -51,5 +55,5 @@ func main() {
 	}
 
 	// Закрываем соединение с БД
-	// repo.Close()
+	repo.Close()
 }

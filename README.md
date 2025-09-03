@@ -45,8 +45,7 @@ google.golang.org/grpc/cmd/protoc-gen-go-grpc
 | `APP_NAME`                              | string   | `go-template`                                  | Имя приложения                                                                   |
 | `APP_ENVIRONMENT`                       | string   | `dev`                                          | Окружение (`dev`, `stage`, `prod`)                                               |
 | `APP_IMAGE`                             | string   | `registry-gitlab16.skiftrade.kz/templates1/go` | ---                                                                              |
-| `IMAGE_TAG`                             | string   | `dev`                                          | Тег образа (уточнить акутальность)                                               |
-| `APP_SWAGGER_FILE`                      | string   | `/api/service.swagger.json`                    | Путь до Swagger файла                                                            |
+| `APP_SWAGGER_FILE`                      | string   | `./api/service.swagger.json`                   | Путь до Swagger файла                                                            |
 | `APP_HTTP_PORT`                         | int      | `8090`                                         | Порт HTTP API                                                                    |
 | `APP_GRPC_PORT`                         | int      | `8091`                                         | Порт gRPC API                                                                    |
 | `APP_LOG_LEVEL`                         | string   | `debug`                                        | Уровень логирования приложения (`trace`, `debug`, `info`, `warn`, `error`)       |
@@ -65,7 +64,6 @@ google.golang.org/grpc/cmd/protoc-gen-go-grpc
 | `PG_SSLROOTCERT`                        | string   | `` (пусто)                                     | Путь к CA-сертификату                                                            |
 | `PG_DEBUG`                              | bool     | `false`                                        | Включить отладочный режим                                                        |
 | `PG_DRIVER_LOG_LEVEL`                   | string   | `info`                                         | Уровень логирования драйвера (`trace`, `debug`, `info`, `warn`, `error`, `none`) |
-| `PG_SIMPLE_PROTOCOL`                    | bool     | `false`                                        | Использовать простой протокол без prepared statements                            |
 | `PG_POOL_STAT_PERIOD`                   | duration | `30s`                                          | Период публикации статистики пула                                                |
 | `PG_POOL_MAX_CONNS`                     | int64    | `10`                                           | Максимальное количество соединений                                               |
 | `PG_POOL_MIN_CONNS`                     | int64    | `0`                                            | Минимальное количество соединений                                                |
