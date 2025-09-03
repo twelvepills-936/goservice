@@ -38,7 +38,7 @@ func main() {
 		slog.ErrorContext(ctx, "failed to init postgres", logger.ErrorAttr(err))
 		return
 	}
-
+	defer pool.Close()
 	repo := repository.NewRepository(pool)
 
 	api.RegisterUsersServer(app.GrpcServer, service.NewService(usecase.NewUseCase(repo)))
@@ -53,7 +53,4 @@ func main() {
 		slog.ErrorContext(ctx, "failed to run app", logger.ErrorAttr(err))
 		return
 	}
-
-	// Закрываем соединение с БД
-	repo.Close()
 }

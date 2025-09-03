@@ -10,7 +10,6 @@ import (
 
 type Repository interface {
 	DBBeginTransaction(ctx context.Context) (pgx.Tx, error)
-	Close()
 
 	ReadUser(ctx context.Context, id int64, dbTx pgx.Tx) (user repoModels.User, err error)
 }
