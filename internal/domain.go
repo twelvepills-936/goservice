@@ -17,3 +17,6 @@ type Repository interface {
 type UseCase interface {
 	GetUser(ctx context.Context, input ucModels.GetUserInput) (output ucModels.GetUserOutput, err error)
 }
+
+type Client interface {
+}
