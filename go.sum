@@ -175,6 +175,8 @@ github.com/googleapis/googleapis v0.0.0-20250902104618-c850d956dff8 h1:Y3x20FMUc
 github.com/googleapis/googleapis v0.0.0-20250902104618-c850d956dff8/go.mod h1:XrPm4xpez/lHHyE+8/G+NqQRcB4lg42HF9zQVTvxtXw=
 github.com/googleapis/googleapis v0.0.0-20250902202942-65afc22de9b3 h1:CuoAgCh8elgRoYcHFsq9KLXdqNkTQIZmIZZqzKKtJfs=
 github.com/googleapis/googleapis v0.0.0-20250902202942-65afc22de9b3/go.mod h1:XrPm4xpez/lHHyE+8/G+NqQRcB4lg42HF9zQVTvxtXw=
+github.com/googleapis/googleapis v0.0.0-20250904074348-8c79c6a82116 h1:Dr3MTWo9SLxG069Hx0arc/gFI8bIRnUgXncKh1v9/b4=
+github.com/googleapis/googleapis v0.0.0-20250904074348-8c79c6a82116/go.mod h1:XrPm4xpez/lHHyE+8/G+NqQRcB4lg42HF9zQVTvxtXw=
 github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 h1:+9834+KizmvFV7pXQGSXQTsaWhq2GjuNUt0aUU0YBYw=
 github.com/grpc-ecosystem/go-grpc-middleware v1.3.0/go.mod h1:z0ButlSOZa5vEBq9m2m2hlwIgKw+rp3sdCBRoJY+30Y=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 h1:5ZPtiqj0JL5oKWmcsq4VMaAW5ukBEgSGXEN89zeH1Jo=
