@@ -2,6 +2,7 @@ package internal
 
 import (
 	"context"
+	rcModels "gitlab16.skiftrade.kz/templates1/go/internal/rest/client/models"
 
 	"github.com/jackc/pgx/v5"
 	repoModels "gitlab16.skiftrade.kz/templates1/go/internal/repository/models"
@@ -19,4 +20,6 @@ type UseCase interface {
 }
 
 type Client interface {
+	PostingsToCancel(ctx context.Context, token string, req rcModels.PostingsToCancelReq) (rcModels.PostingsToCancelResp, error)
+	PostingsCancelResponse(ctx context.Context, token string, req rcModels.PostingsCancelResponseReq) (rcModels.PostingsCancelResponseResp, error)
 }
