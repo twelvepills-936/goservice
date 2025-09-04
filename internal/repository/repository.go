@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"strconv"
 
+	sq "github.com/Masterminds/squirrel"
 	"github.com/exaring/otelpgx"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -16,12 +17,14 @@ import (
 )
 
 type Repository struct {
-	db *pgxpool.Pool
+	db      *pgxpool.Pool
+	builder sq.StatementBuilderType
 }
 
 func NewRepository(db *pgxpool.Pool) internal.Repository {
 	return &Repository{
-		db: db,
+		db:      db,
+		builder: sq.StatementBuilder.PlaceholderFormat(sq.Dollar),
 	}
 }
 
