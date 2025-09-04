@@ -15,6 +15,11 @@ import (
 	"gitlab16.skiftrade.kz/templates1/go/internal"
 	"gitlab16.skiftrade.kz/templates1/go/internal/rest/client/models"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+	"go.opentelemetry.io/otel/trace"
+)
+
+const (
+	maxResponseSize = 10 << 20 // 10 MB
 )
 
 type client struct {
@@ -38,14 +43,14 @@ func NewClient(config models.Config) internal.Client {
 	}
 }
 
-func (c *client) PostingsToCancel(ctx context.Context, token string, req models.PostingsToCancelReq) (response models.PostingsToCancelResp, err error) {
-	u := url.URL{
+func (c *client) PostingsToCancel(ctx context.Context, token string, req models.PostingsToCancelReq) (models.PostingsToCancelResp, error) {
+	u := &url.URL{
 		Scheme: "https",
 		Host:   c.config.Host,
 		Path:   models.PathPostingsToCancel,
 	}
 
-	// Добавляем query параметр parcelType=MVP
+	// Формирование query-параметров
 	q := u.Query()
 	if req.ParcelType != "" {
 		q.Set("parcelType", req.ParcelType)
@@ -55,103 +60,111 @@ func (c *client) PostingsToCancel(ctx context.Context, token string, req models.
 	}
 	u.RawQuery = q.Encode()
 
-	// Формируем HTTP запрос с контекстом
-	request, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
+	httpReq, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
 	if err != nil {
-		return response, err
+		return models.PostingsToCancelResp{}, fmt.Errorf("create request: %w", err)
 	}
 
-	// Устанавливаем заголовки
-	request.Header.Set("Authorization", "Bearer "+token)
+	httpReq.Header.Set("Authorization", "Bearer "+token)
 
-	// Отправляем запрос
-	resp, err := c.httpClient.Do(request)
-	if err != nil {
-		slog.ErrorContext(ctx, "failed to do the request", logger.ErrorAttr(err), logger.InputAttr(request))
-		return response, err
+	var resp models.PostingsToCancelResp
+	if err := c.doRequest(ctx, httpReq, &resp); err != nil {
+		return models.PostingsToCancelResp{}, fmt.Errorf("postings to cancel: %w", err)
 	}
-	defer func(body io.ReadCloser) {
-		if err := resp.Body.Close(); err != nil {
-			slog.ErrorContext(ctx, "failed to close response body",
-				logger.ErrorAttr(err),
-				slog.String("url", u.String()))
-		}
-	}(resp.Body)
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		slog.ErrorContext(ctx, "failed to read body", logger.InputAttr(request),
-			slog.Int("status_code", resp.StatusCode))
-		return response, err
-	}
-
-	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
-		slog.ErrorContext(ctx, "unexpected status code", logger.InputAttr(request),
-			slog.Int("status_code", resp.StatusCode), slog.String("body", string(body)))
-		return response, fmt.Errorf("unexpected status code: %d, body: %s", resp.StatusCode, string(body))
-	}
-
-	// Декодируем JSON ответ в структуру
-	if err = json.Unmarshal(body, &response); err != nil {
-		return response, err
-	}
-
-	return response, nil
+	return resp, nil
 }
 
-func (c *client) PostingsCancelResponse(ctx context.Context, token string, req models.PostingsCancelResponseReq) (response models.PostingsCancelResponseResp, err error) {
-	u := url.URL{
+func (c *client) PostingsCancelResponse(ctx context.Context, token string, req models.PostingsCancelResponseReq) (models.PostingsCancelResponseResp, error) {
+	u := &url.URL{
 		Scheme: "https",
 		Host:   c.config.Host,
 		Path:   models.PathPostingsCancelResponse,
 	}
 
-	requestBody, err := json.Marshal(req.Body)
+	body, err := json.Marshal(req.Body)
 	if err != nil {
-		return response, fmt.Errorf("failed to marshal request body: %w", err)
+		return models.PostingsCancelResponseResp{}, fmt.Errorf("marshal request body: %w", err)
 	}
 
-	// Формируем HTTP запрос с контекстом
-	request, err := http.NewRequestWithContext(ctx, http.MethodPost, u.String(), bytes.NewReader(requestBody))
+	httpReq, err := http.NewRequestWithContext(ctx, http.MethodPost, u.String(), bytes.NewReader(body))
 	if err != nil {
-		return response, err
+		return models.PostingsCancelResponseResp{}, fmt.Errorf("create request: %w", err)
+	}
+	httpReq.Header.Set("Content-Type", "application/json")
+	httpReq.Header.Set("Authorization", "Bearer "+token)
+
+	var resp models.PostingsCancelResponseResp
+	if err := c.doRequest(ctx, httpReq, &resp); err != nil {
+		return models.PostingsCancelResponseResp{}, fmt.Errorf("postings cancel response: %w", err)
+	}
+	return resp, nil
+}
+
+// doRequest обрабатывает HTTP-запрос и ответ
+func (c *client) doRequest(ctx context.Context, req *http.Request, dest interface{}) error {
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		logRequestError(ctx, req, "http client error", err)
+		return fmt.Errorf("do request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	// Защита от больших ответов
+	limitReader := io.LimitReader(resp.Body, maxResponseSize)
+	body, err := io.ReadAll(limitReader)
+	if err != nil {
+		logRequestError(ctx, req, "read body error", err)
+		return fmt.Errorf("read response body: %w", err)
 	}
 
-	// Устанавливаем заголовки
-	request.Header.Set("Content-Type", "application/json")
-	request.Header.Set("Authorization", "Bearer "+token)
-
-	// Отправляем запрос
-	resp, err := c.httpClient.Do(request)
-	if err != nil {
-		slog.ErrorContext(ctx, "failed to do the request", logger.ErrorAttr(err), logger.InputAttr(request))
-		return response, err
-	}
-	defer func(body io.ReadCloser) {
-		if err := resp.Body.Close(); err != nil {
-			slog.ErrorContext(ctx, "failed to close response body",
-				logger.ErrorAttr(err),
-				slog.String("url", u.String()))
-		}
-	}(resp.Body)
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		slog.ErrorContext(ctx, "failed to read body", logger.InputAttr(request),
-			slog.Int("status_code", resp.StatusCode))
-		return response, err
-	}
-
+	// Проверка статуса
 	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
-		slog.ErrorContext(ctx, "unexpected status code", logger.InputAttr(request),
-			slog.Int("status_code", resp.StatusCode), slog.String("body", string(body)))
-		return response, fmt.Errorf("unexpected status code: %d, body: %s", resp.StatusCode, string(body))
+		logErrorResponse(ctx, req, resp, body)
+		return fmt.Errorf("unexpected status %d: %s", resp.StatusCode, truncateString(string(body), 500))
 	}
 
-	// Декодируем JSON ответ в структуру
-	if err = json.Unmarshal(body, &response); err != nil {
-		return response, err
+	// Декодирование
+	if err := json.Unmarshal(body, dest); err != nil {
+		logErrorResponse(ctx, req, resp, body)
+		return fmt.Errorf("unmarshal response: %w", err)
 	}
 
-	return response, nil
+	return nil
+}
+
+func logRequestError(ctx context.Context, req *http.Request, msg string, err error) {
+	attrs := []any{
+		logger.ErrorAttr(err),
+		slog.String("method", req.Method),
+		slog.String("url", req.URL.String()),
+	}
+
+	if span := trace.SpanFromContext(ctx); span.SpanContext().HasTraceID() {
+		attrs = append(attrs, slog.String("trace_id", span.SpanContext().TraceID().String()))
+	}
+
+	slog.ErrorContext(ctx, msg, attrs...)
+}
+
+func logErrorResponse(ctx context.Context, req *http.Request, resp *http.Response, body []byte) {
+	attrs := []any{
+		slog.String("method", req.Method),
+		slog.String("url", req.URL.String()),
+		slog.Int("status", resp.StatusCode),
+		slog.String("body", truncateString(string(body), 500)),
+	}
+
+	if span := trace.SpanFromContext(ctx); span.SpanContext().HasTraceID() {
+		attrs = append(attrs, slog.String("trace_id", span.SpanContext().TraceID().String()))
+	}
+
+	slog.ErrorContext(ctx, "unexpected response", attrs...)
+}
+
+// truncateString обрезает строку до указанной длины
+func truncateString(s string, max int) string {
+	if len(s) <= max {
+		return s
+	}
+	return s[:max] + "..."
 }
