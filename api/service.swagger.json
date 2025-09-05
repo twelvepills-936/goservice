@@ -17,7 +17,7 @@
   ],
   "paths": {
     "/v1/user": {
-      "post": {
+      "get": {
         "summary": "GetUser",
         "description": "Метод для получения пользователя",
         "operationId": "Users_GetUser",
@@ -37,12 +37,12 @@
         },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "name": "userId",
+            "description": "The UserId field description",
+            "in": "query",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/gotemplateGetUserRequest"
-            }
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -52,16 +52,6 @@
     }
   },
   "definitions": {
-    "gotemplateGetUserRequest": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "format": "int64",
-          "description": "The UserId field description"
-        }
-      }
-    },
     "gotemplateGetUserResponse": {
       "type": "object",
       "properties": {

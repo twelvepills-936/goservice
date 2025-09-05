@@ -3,12 +3,14 @@ module gitlab16.skiftrade.kz/templates1/go
 go 1.24.2
 
 require (
+	github.com/Masterminds/squirrel v1.5.4
 	github.com/exaring/otelpgx v0.9.3
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
 	github.com/jackc/pgx/v5 v5.7.5
-	gitlab16.skiftrade.kz/libs-go/health v1.0.0
 	gitlab16.skiftrade.kz/libs-go/logger v1.0.2
 	gitlab16.skiftrade.kz/libs-go/new-app v1.0.4
+	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.59.0
+	go.opentelemetry.io/otel/trace v1.36.0
 	google.golang.org/genproto v0.0.0-20230223222841-637eb2293923
 	google.golang.org/grpc v1.71.1
 	google.golang.org/protobuf v1.36.6
@@ -16,7 +18,6 @@ require (
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
-	github.com/Masterminds/squirrel v1.5.4 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/envoyproxy/protoc-gen-validate v1.2.1 // indirect
@@ -39,7 +40,7 @@ require (
 	github.com/go-openapi/swag/typeutils v0.24.0 // indirect
 	github.com/go-openapi/swag/yamlutils v0.24.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/googleapis/googleapis v0.0.0-20250904074348-8c79c6a82116 // indirect
+	github.com/googleapis/googleapis v0.0.0-20250904230352-a6fb27934910 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
@@ -57,12 +58,12 @@ require (
 	github.com/swaggo/files v1.0.1 // indirect
 	github.com/swaggo/http-swagger v1.3.4 // indirect
 	github.com/swaggo/swag v1.16.6 // indirect
+	gitlab16.skiftrade.kz/libs-go/health v1.0.0 // indirect
 	gitlab16.skiftrade.kz/libs-go/requestid v1.0.0 // indirect
 	gitlab16.skiftrade.kz/libs-go/telemetry v1.0.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/contrib/bridges/otelslog v0.10.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.60.0 // indirect
-	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.59.0 // indirect
 	go.opentelemetry.io/otel v1.36.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc v0.11.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc v1.35.0 // indirect
@@ -73,7 +74,6 @@ require (
 	go.opentelemetry.io/otel/sdk v1.36.0 // indirect
 	go.opentelemetry.io/otel/sdk/log v0.11.0 // indirect
 	go.opentelemetry.io/otel/sdk/metric v1.36.0 // indirect
-	go.opentelemetry.io/otel/trace v1.36.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.5.0 // indirect
 	golang.org/x/crypto v0.41.0 // indirect
 	golang.org/x/mod v0.27.0 // indirect

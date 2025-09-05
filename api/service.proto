@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package api.gotemplate;
 
+import "validate/validate.proto";
+import "google/api/field_behavior.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -16,8 +18,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 service Users {
   rpc GetUser (GetUserRequest) returns (GetUserResponse) {
     option (google.api.http) = {
-      post: "/v1/user"
-      body: "*"
+      get: "/v1/user"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       summary: "GetUser"
@@ -28,7 +29,13 @@ service Users {
 
 
 message GetUserRequest {
-  int64 user_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The UserId field description"}];
+  int64 user_id = 1 [
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "The UserId field description"
+    },
+    (google.api.field_behavior) = REQUIRED,
+    (validate.rules).int64.gt = 0
+  ];
 }
 
 message GetUserResponse {

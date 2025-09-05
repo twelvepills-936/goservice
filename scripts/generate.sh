@@ -99,6 +99,7 @@ function import_proto_deps {
     "google.golang.org/protobuf"
     "github.com/googleapis/googleapis"
     "github.com/grpc-ecosystem/grpc-gateway/v2"
+    "github.com/envoyproxy/protoc-gen-validate"
   )
 
   for dep in "${proto_deps[@]}"; do

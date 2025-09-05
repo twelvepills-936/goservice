@@ -57,7 +57,16 @@ func (m *GetUserRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for UserId
+	if m.GetUserId() <= 0 {
+		err := GetUserRequestValidationError{
+			field:  "UserId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return GetUserRequestMultiError(errors)

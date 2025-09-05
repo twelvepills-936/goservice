@@ -35,12 +35,18 @@ var (
 	_ = metadata.Join
 )
 
+var filter_Users_GetUser_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+
 func request_Users_GetUser_0(ctx context.Context, marshaler runtime.Marshaler, client UsersClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetUserRequest
 		metadata runtime.ServerMetadata
 	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+	io.Copy(io.Discard, req.Body)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Users_GetUser_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetUser(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -52,7 +58,10 @@ func local_request_Users_GetUser_0(ctx context.Context, marshaler runtime.Marsha
 		protoReq GetUserRequest
 		metadata runtime.ServerMetadata
 	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Users_GetUser_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetUser(ctx, &protoReq)
@@ -65,7 +74,7 @@ func local_request_Users_GetUser_0(ctx context.Context, marshaler runtime.Marsha
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterUsersHandlerFromEndpoint instead.
 // GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterUsersHandlerServer(ctx context.Context, mux *runtime.ServeMux, server UsersServer) error {
-	mux.Handle(http.MethodPost, pattern_Users_GetUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_Users_GetUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -125,7 +134,7 @@ func RegisterUsersHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
 // "UsersClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterUsersHandlerClient(ctx context.Context, mux *runtime.ServeMux, client UsersClient) error {
-	mux.Handle(http.MethodPost, pattern_Users_GetUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_Users_GetUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)

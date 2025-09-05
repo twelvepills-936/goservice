@@ -7,6 +7,7 @@
 package gotemplate
 
 import (
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -236,17 +237,18 @@ var File_service_proto protoreflect.FileDescriptor
 
 const file_service_proto_rawDesc = "" +
 	"\n" +
-	"\rservice.proto\x12\x0eapi.gotemplate\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"L\n" +
-	"\x0eGetUserRequest\x12:\n" +
-	"\auser_id\x18\x01 \x01(\x03B!\x92A\x1e2\x1cThe UserId field descriptionR\x06userId\";\n" +
+	"\rservice.proto\x12\x0eapi.gotemplate\x1a\x17validate/validate.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"V\n" +
+	"\x0eGetUserRequest\x12D\n" +
+	"\auser_id\x18\x01 \x01(\x03B+\x92A\x1e2\x1cThe UserId field description\xe0A\x02\xfaB\x04\"\x02 \x00R\x06userId\";\n" +
 	"\x0fGetUserResponse\x12(\n" +
 	"\x04data\x18\x01 \x01(\v2\x14.api.gotemplate.UserR\x04data\"D\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
-	"\asurname\x18\x03 \x01(\tR\asurname2\xb4\x01\n" +
-	"\x05Users\x12\xaa\x01\n" +
-	"\aGetUser\x12\x1e.api.gotemplate.GetUserRequest\x1a\x1f.api.gotemplate.GetUserResponse\"^\x92AH\x12\aGetUser\x1a=Метод для получения пользователя\x82\xd3\xe4\x93\x02\r:\x01*\"\b/v1/userBM\x92A\x16\x12\x14\n" +
+	"\asurname\x18\x03 \x01(\tR\asurname2\xb1\x01\n" +
+	"\x05Users\x12\xa7\x01\n" +
+	"\aGetUser\x12\x1e.api.gotemplate.GetUserRequest\x1a\x1f.api.gotemplate.GetUserResponse\"[\x92AH\x12\aGetUser\x1a=Метод для получения пользователя\x82\xd3\xe4\x93\x02\n" +
+	"\x12\b/v1/userBM\x92A\x16\x12\x14\n" +
 	"\vGO Template2\x051.0.0Z2gitlab16.skiftrade.kz/templates1/go/api;gotemplateb\x06proto3"
 
 var file_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
