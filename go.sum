@@ -173,6 +173,8 @@ github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5m
 github.com/googleapis/google-cloud-go-testing v0.0.0-20200911160855-bcd43fbb19e8/go.mod h1:dvDLG8qkwmyD9a/MJJN3XJcT3xFxOKAvTZGvuZmac9g=
 github.com/googleapis/googleapis v0.0.0-20250904230352-a6fb27934910 h1:VmNA8jDtufItqUJyZMDzxeuEPROusftp6mjhCugL6Sg=
 github.com/googleapis/googleapis v0.0.0-20250904230352-a6fb27934910/go.mod h1:XrPm4xpez/lHHyE+8/G+NqQRcB4lg42HF9zQVTvxtXw=
+github.com/googleapis/googleapis v0.0.0-20250909200459-6d1dca2b8e3d h1:ey5oYZin2xRbZ/ZR21zoPH806WJLDh62gXBlIFVY6Kk=
+github.com/googleapis/googleapis v0.0.0-20250909200459-6d1dca2b8e3d/go.mod h1:XrPm4xpez/lHHyE+8/G+NqQRcB4lg42HF9zQVTvxtXw=
 github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 h1:+9834+KizmvFV7pXQGSXQTsaWhq2GjuNUt0aUU0YBYw=
 github.com/grpc-ecosystem/go-grpc-middleware v1.3.0/go.mod h1:z0ButlSOZa5vEBq9m2m2hlwIgKw+rp3sdCBRoJY+30Y=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 h1:5ZPtiqj0JL5oKWmcsq4VMaAW5ukBEgSGXEN89zeH1Jo=

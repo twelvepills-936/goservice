@@ -7,7 +7,7 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"gitlab16.skiftrade.kz/libs-go/logger"
-	"gitlab16.skiftrade.kz/templates1/go/internal/repository/models"
+	"gitlab16.skiftrade.kz/templates/go/internal/repository/models"
 )
 
 func (r *Repository) ReadUser(ctx context.Context, id int64, dbTx pgx.Tx) (user models.User, err error) {

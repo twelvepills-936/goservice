@@ -1,4 +1,4 @@
-module gitlab16.skiftrade.kz/templates1/go
+module gitlab16.skiftrade.kz/templates/go
 
 go 1.24.2
 
@@ -40,7 +40,7 @@ require (
 	github.com/go-openapi/swag/typeutils v0.24.0 // indirect
 	github.com/go-openapi/swag/yamlutils v0.24.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/googleapis/googleapis v0.0.0-20250904230352-a6fb27934910 // indirect
+	github.com/googleapis/googleapis v0.0.0-20250909200459-6d1dca2b8e3d // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect

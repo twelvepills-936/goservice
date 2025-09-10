@@ -12,8 +12,8 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"gitlab16.skiftrade.kz/libs-go/logger"
-	"gitlab16.skiftrade.kz/templates1/go/internal"
-	"gitlab16.skiftrade.kz/templates1/go/internal/repository/models"
+	"gitlab16.skiftrade.kz/templates/go/internal"
+	"gitlab16.skiftrade.kz/templates/go/internal/repository/models"
 )
 
 type Repository struct {

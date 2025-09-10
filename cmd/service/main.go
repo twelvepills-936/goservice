@@ -6,12 +6,12 @@ import (
 
 	"gitlab16.skiftrade.kz/libs-go/logger"
 	application "gitlab16.skiftrade.kz/libs-go/new-app"
-	"gitlab16.skiftrade.kz/templates1/go/internal/repository"
-	repoModels "gitlab16.skiftrade.kz/templates1/go/internal/repository/models"
-	"gitlab16.skiftrade.kz/templates1/go/internal/service"
-	"gitlab16.skiftrade.kz/templates1/go/internal/usecase"
-	api "gitlab16.skiftrade.kz/templates1/go/pkg/api"
-	"gitlab16.skiftrade.kz/templates1/go/pkg/config"
+	"gitlab16.skiftrade.kz/templates/go/internal/repository"
+	repoModels "gitlab16.skiftrade.kz/templates/go/internal/repository/models"
+	"gitlab16.skiftrade.kz/templates/go/internal/service"
+	"gitlab16.skiftrade.kz/templates/go/internal/usecase"
+	api "gitlab16.skiftrade.kz/templates/go/pkg/api"
+	"gitlab16.skiftrade.kz/templates/go/pkg/config"
 )
 
 func main() {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	repoModels "gitlab16.skiftrade.kz/templates1/go/internal/repository/models"
-	"gitlab16.skiftrade.kz/templates1/go/internal/usecase/models"
+	repoModels "gitlab16.skiftrade.kz/templates/go/internal/repository/models"
+	"gitlab16.skiftrade.kz/templates/go/internal/usecase/models"
 )
 
 func (uc *useCase) GetUser(ctx context.Context, input models.GetUserInput) (output models.GetUserOutput, err error) {

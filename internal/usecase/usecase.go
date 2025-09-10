@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"gitlab16.skiftrade.kz/templates1/go/internal"
+	"gitlab16.skiftrade.kz/templates/go/internal"
 )
 
 type useCase struct {

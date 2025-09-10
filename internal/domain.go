@@ -2,11 +2,11 @@ package internal
 
 import (
 	"context"
-	rcModels "gitlab16.skiftrade.kz/templates1/go/internal/rest/client/models"
+	rcModels "gitlab16.skiftrade.kz/templates/go/internal/rest/client/models"
 
 	"github.com/jackc/pgx/v5"
-	repoModels "gitlab16.skiftrade.kz/templates1/go/internal/repository/models"
-	ucModels "gitlab16.skiftrade.kz/templates1/go/internal/usecase/models"
+	repoModels "gitlab16.skiftrade.kz/templates/go/internal/repository/models"
+	ucModels "gitlab16.skiftrade.kz/templates/go/internal/usecase/models"
 )
 
 type Repository interface {

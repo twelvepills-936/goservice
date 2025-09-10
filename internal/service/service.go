@@ -4,10 +4,10 @@ import (
 	"context"
 	"errors"
 
-	"gitlab16.skiftrade.kz/templates1/go/internal"
-	"gitlab16.skiftrade.kz/templates1/go/internal/service/models"
-	ucModels "gitlab16.skiftrade.kz/templates1/go/internal/usecase/models"
-	api "gitlab16.skiftrade.kz/templates1/go/pkg/api"
+	"gitlab16.skiftrade.kz/templates/go/internal"
+	"gitlab16.skiftrade.kz/templates/go/internal/service/models"
+	ucModels "gitlab16.skiftrade.kz/templates/go/internal/usecase/models"
+	api "gitlab16.skiftrade.kz/templates/go/pkg/api"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
