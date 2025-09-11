@@ -1,5 +1,9 @@
+version: "2"
+run:
+  concurrency: 4
+  modules-download-mode: readonly
 linters:
-  disable-all: true
+  default: none
   enable:
     - dogsled
     - dupl
@@ -8,50 +12,54 @@ linters:
     - goconst
     - gocritic
     - gocyclo
-    - gofmt
-    - goimports
     - goprintffuncname
-    - gosimple
     - govet
     - ineffassign
     - misspell
     - nakedret
     - staticcheck
-    - stylecheck
     - unconvert
     - unparam
     - unused
     - whitespace
-#    - typecheck
-#    - lll
-
-linters-settings:
-  errcheck:
-    check-type-assertions: true
-    check-blank: true
-  gofmt:
-    simplify: false
-  gocritic:
-    disabled-checks:
-      - ifElseChain
-  gocyclo:
-    max-complexity: 15
-  lll:
-    line-length: 140
-
+  settings:
+    errcheck:
+      check-type-assertions: true
+      check-blank: true
+    gocritic:
+      disabled-checks:
+        - ifElseChain
+    lll:
+      line-length: 140
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - dupl
+          - errcheck
+          - lll
+        path: _test\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
 issues:
   max-same-issues: 0
-  exclude-rules:
-    - path: _test\.go
-      linters:
-        - dupl
-        - errcheck
-        - lll
-
-run:
-  modules-download-mode: readonly
-  skip-dirs:
-    - pkg
-    - semgrep-go
-  concurrency: 4
-  timeout: 5m
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    gofmt:
+      simplify: false
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
