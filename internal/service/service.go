@@ -5,7 +5,6 @@ import (
 	"errors"
 
 	"gitlab16.skiftrade.kz/templates/go/internal"
-	"gitlab16.skiftrade.kz/templates/go/internal/service/models"
 	ucModels "gitlab16.skiftrade.kz/templates/go/internal/usecase/models"
 	api "gitlab16.skiftrade.kz/templates/go/pkg/api"
 	"google.golang.org/grpc/codes"
@@ -36,8 +35,11 @@ func (s *service) GetUser(ctx context.Context, req *api.GetUserRequest) (*api.Ge
 		return nil, status.Error(codes.Internal, ucModels.ErrInternalServerError.Error())
 	}
 
-	resp := &api.GetUserResponse{}
-	resp.SetData(models.ToProtoUser(user.Data))
-
-	return resp, nil
+	return &api.GetUserResponse{
+		Data: &api.User{
+			Id:      user.Data.ID,
+			Name:    user.Data.Name,
+			Surname: user.Data.Surname,
+		},
+	}, nil
 }

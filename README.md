@@ -30,7 +30,7 @@ google.golang.org/grpc/cmd/protoc-gen-go-grpc
 1. Необходмио описать методы в api/service.proto
 2. Сгенерировать необходимые для работы
 ```
-./scripts/generate.sh
+make gen.proto
 ```
 
 ## Конфигурация PostgreSQL через ENV

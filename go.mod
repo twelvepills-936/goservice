@@ -3,6 +3,7 @@ module gitlab16.skiftrade.kz/templates/go
 go 1.24.2
 
 require (
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.9-20250717185734-6c6e0d3c608e.1
 	github.com/Masterminds/squirrel v1.5.4
 	github.com/exaring/otelpgx v0.9.3
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3
@@ -13,7 +14,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.36.0
 	google.golang.org/genproto v0.0.0-20230223222841-637eb2293923
 	google.golang.org/grpc v1.71.1
-	google.golang.org/protobuf v1.36.6
+	google.golang.org/protobuf v1.36.9
 )
 
 require (
@@ -40,7 +41,6 @@ require (
 	github.com/go-openapi/swag/typeutils v0.24.0 // indirect
 	github.com/go-openapi/swag/yamlutils v0.24.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/googleapis/googleapis v0.0.0-20250909200459-6d1dca2b8e3d // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
