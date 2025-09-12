@@ -3,7 +3,6 @@ module gitlab16.skiftrade.kz/templates/go
 go 1.24.2
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.9-20250717185734-6c6e0d3c608e.1
 	github.com/Masterminds/squirrel v1.5.4
 	github.com/exaring/otelpgx v0.9.3
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3

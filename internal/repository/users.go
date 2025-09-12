@@ -12,10 +12,10 @@ import (
 
 func (r *Repository) ReadUser(ctx context.Context, id int64, dbTx pgx.Tx) (user models.User, err error) {
 	const q = `
-		SELECT id, name, surname
-		FROM users
-		WHERE id = $1
-		LIMIT 1`
+SELECT id, name, surname
+FROM users
+WHERE id = $1
+LIMIT 1`
 
 	if dbTx != nil {
 		err = dbTx.QueryRow(ctx, q,
