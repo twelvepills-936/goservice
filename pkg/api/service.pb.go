@@ -7,7 +7,6 @@
 package gotemplate
 
 import (
-	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -176,9 +175,9 @@ var File_service_proto protoreflect.FileDescriptor
 
 const file_service_proto_rawDesc = "" +
 	"\n" +
-	"\rservice.proto\x12\x0eapi.gotemplate\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"V\n" +
-	"\x0eGetUserRequest\x12D\n" +
-	"\auser_id\x18\x01 \x01(\x03B+\x92A\x1e2\x1cThe UserId field description\xe0A\x02\xbaH\x04\"\x02 \x00R\x06userId\";\n" +
+	"\rservice.proto\x12\x0eapi.gotemplate\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"O\n" +
+	"\x0eGetUserRequest\x12=\n" +
+	"\auser_id\x18\x01 \x01(\x03B$\x92A\x1e2\x1cThe UserId field description\xe0A\x02R\x06userId\";\n" +
 	"\x0fGetUserResponse\x12(\n" +
 	"\x04data\x18\x01 \x01(\v2\x14.api.gotemplate.UserR\x04data\"D\n" +
 	"\x04User\x12\x0e\n" +
