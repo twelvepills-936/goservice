@@ -7,6 +7,9 @@
   "tags": [
     {
       "name": "Users"
+    },
+    {
+      "name": "Facebase"
     }
   ],
   "consumes": [
@@ -16,6 +19,40 @@
     "application/json"
   ],
   "paths": {
+    "/v1/register": {
+      "post": {
+        "summary": "RegisterByTelegram",
+        "description": "Register user by Telegram WebApp init data",
+        "operationId": "Facebase_RegisterByTelegram",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gotemplateRegisterByTelegramResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gotemplateRegisterByTelegramRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Facebase"
+        ]
+      }
+    },
     "/v1/user": {
       "get": {
         "summary": "GetUser",
@@ -49,6 +86,38 @@
           "Users"
         ]
       }
+    },
+    "/v1/users/telegram/{telegramId}": {
+      "get": {
+        "summary": "GetUserByTelegramId",
+        "description": "Get user profile by telegram id",
+        "operationId": "Facebase_GetUserByTelegramId",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gotemplateGetUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "telegramId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Facebase"
+        ]
+      }
     }
   },
   "definitions": {
@@ -57,6 +126,31 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/gotemplateUser"
+        }
+      }
+    },
+    "gotemplateRegisterByTelegramRequest": {
+      "type": "object",
+      "properties": {
+        "initDataRaw": {
+          "type": "string"
+        },
+        "startParam": {
+          "type": "string",
+          "title": "referrer telegram_id"
+        }
+      },
+      "title": "Facebase messages",
+      "required": [
+        "initDataRaw"
+      ]
+    },
+    "gotemplateRegisterByTelegramResponse": {
+      "type": "object",
+      "properties": {
+        "profileId": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

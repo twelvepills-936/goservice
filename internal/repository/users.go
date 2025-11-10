@@ -6,7 +6,7 @@ import (
 	"log/slog"
 
 	"github.com/jackc/pgx/v5"
-	"gitlab16.skiftrade.kz/libs-go/logger"
+	"gitlab16.skiftrade.kz/templates/go/pkg/logger"
 	"gitlab16.skiftrade.kz/templates/go/internal/repository/models"
 )
 
@@ -17,18 +17,13 @@ FROM users
 WHERE id = $1
 LIMIT 1`
 
-	if dbTx != nil {
-		err = dbTx.QueryRow(ctx, q,
-			id).Scan(&user.ID, &user.Name, &user.Surname)
-	} else {
-		err = r.db.QueryRow(ctx, q,
-			id).Scan(&user.ID, &user.Name, &user.Surname)
-	}
+	qry := r.getQueryable(dbTx)
+	err = qry.QueryRow(ctx, q, id).Scan(&user.ID, &user.Name, &user.Surname)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
 			return user, models.ErrUserIsNotFound
 		}
-		slog.ErrorContext(ctx, "failed to read user from postgres", logger.ErrorAttr(err), logger.InputAttr(id))
+		slog.ErrorContext(ctx, "failed to read user from postgres", logger.ErrorAttr(err), logger.Int64Attr("user_id", id))
 		return user, err
 	}
 

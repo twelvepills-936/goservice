@@ -1,7 +1,7 @@
 package models
 
 import (
-	"time"
+    "time"
 )
 
 type ConfigPostgres struct {
@@ -22,3 +22,6 @@ type ConfigPostgres struct {
 	PoolMaxConnIdleTime   time.Duration
 	PoolHealthCheckPeriod time.Duration
 }
+
+var (
+)

@@ -10,10 +10,11 @@ import (
 	sq "github.com/Masterminds/squirrel"
 	"github.com/exaring/otelpgx"
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"gitlab16.skiftrade.kz/libs-go/logger"
 	"gitlab16.skiftrade.kz/templates/go/internal"
 	"gitlab16.skiftrade.kz/templates/go/internal/repository/models"
+	"gitlab16.skiftrade.kz/templates/go/pkg/logger"
 )
 
 type Repository struct {
@@ -21,6 +22,13 @@ type Repository struct {
 	builder sq.StatementBuilderType
 }
 
+// Queryable interface for executing queries on both pool and transaction
+type Queryable interface {
+	QueryRow(ctx context.Context, sql string, args ...interface{}) pgx.Row
+	Exec(ctx context.Context, sql string, arguments ...interface{}) (pgconn.CommandTag, error)
+}
+
+// NewRepository creates a postgres-backed repository.
 func NewRepository(db *pgxpool.Pool) internal.Repository {
 	return &Repository{
 		db:      db,
@@ -34,8 +42,17 @@ func (r *Repository) DBBeginTransaction(ctx context.Context) (pgx.Tx, error) {
 	return r.db.Begin(ctx)
 }
 
+// getQueryable returns the appropriate queryable interface (transaction or pool)
+func (r *Repository) getQueryable(tx pgx.Tx) Queryable {
+	if tx != nil {
+		return tx
+	}
+	return r.db
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// NewPostgres initializes pgx pool with telemetry.
 func NewPostgres(ctx context.Context, c models.ConfigPostgres) (*pgxpool.Pool, error) {
 	dsn := getDSN(c)
 

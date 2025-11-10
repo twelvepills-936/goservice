@@ -8,6 +8,12 @@ import (
 
 type Config struct {
 	Postgres ConfigPostgres
+	App      ConfigApp
+}
+
+type ConfigApp struct {
+	HTTPPort int
+	GRPCPort int
 }
 
 type ConfigPostgres struct {
@@ -67,15 +73,36 @@ func getenvDuration(key string, def time.Duration) time.Duration {
 }
 
 func LoadConfig() Config {
-	return Config{Postgres: LoadPostgresConfig()}
+	return Config{
+		Postgres: LoadPostgresConfig(),
+		App:      LoadAppConfig(),
+	}
+}
+
+func LoadAppConfig() ConfigApp {
+	return ConfigApp{
+		HTTPPort: int(getenvInt64("APP_HTTP_PORT", 8090)),
+		GRPCPort: int(getenvInt64("APP_GRPC_PORT", 8091)),
+	}
 }
 
 func LoadPostgresConfig() ConfigPostgres {
+	// Поддержка PG_PASS и PG_PASSWORD (как указано в README)
+	// Значение по умолчанию "postgres" соответствует настройкам Docker-контейнера
+	pass := getenv("PG_PASS", "")
+	if pass == "" {
+		pass = getenv("PG_PASSWORD", "")
+	}
+	// Если ни одна переменная не установлена, используем значение по умолчанию
+	if pass == "" {
+		pass = "postgres"
+	}
+
 	return ConfigPostgres{
 		Host:           getenv("PG_HOST", "localhost"),
 		Port:           getenv("PG_PORT", "5432"),
 		User:           getenv("PG_USER", "postgres"),
-		Pass:           getenv("PG_PASS", ""),
+		Pass:           pass,
 		DBName:         getenv("PG_DBNAME", "postgres"),
 		SSLMode:        getenv("PG_SSLMODE", "disable"),
 		SSLRootCert:    getenv("PG_SSLROOTCERT", ""),

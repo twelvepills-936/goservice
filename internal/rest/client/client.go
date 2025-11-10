@@ -11,9 +11,9 @@ import (
 	"net/url"
 	"strconv"
 
-	"gitlab16.skiftrade.kz/libs-go/logger"
 	"gitlab16.skiftrade.kz/templates/go/internal"
 	"gitlab16.skiftrade.kz/templates/go/internal/rest/client/models"
+	"gitlab16.skiftrade.kz/templates/go/pkg/logger"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel/trace"
 )
